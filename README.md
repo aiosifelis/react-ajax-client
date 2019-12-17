@@ -42,17 +42,17 @@ const FetchComponent = () => (
 const SendComponent = () => (
     <Send
         path="/users"
-        onProgress={() => setStatus("Processing...")}
+        onProgress={() => console.log("Processing")}
         onComplete={response =>
-            setStatus("Completed: " + JSON.stringify(response))
+            console.log("Completed", JSON.stringify(response))
         }
-        onError={response => setStatus("Error:" + JSON.stringify(response))}
+        onError={response => console.error("Error", JSON.stringify(response))}
     >
         {trigger => (
             <button
                 onClick={e => trigger({ firstName: "Billy", lastName: "Jean" })}
             >
-                Create Item
+                Create a User
             </button>
         )}
     </Send>
