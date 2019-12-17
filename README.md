@@ -1,6 +1,7 @@
 # react-ajax-client
 
-> Insired by [ApolloClient](https://github.com/apollographql/react-apollo), `React-Ajax-Client`. Consume rest endpoints using react components
+> Consume rest endpoints using react components
+> Inspired by [ApolloClient](https://github.com/apollographql/react-apollo)
 
 [![NPM](https://img.shields.io/npm/v/react-ajax-client.svg)](https://www.npmjs.com/package/react-ajax-client) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
