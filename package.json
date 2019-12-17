@@ -1,6 +1,6 @@
 {
     "name": "react-ajax-client",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Consume rest endpoints using react components",
     "author": "aiosifelis",
     "license": "MIT",
