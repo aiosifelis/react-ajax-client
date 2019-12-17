@@ -10,6 +10,10 @@
 npm install --save react-ajax-client
 ```
 
+```bash
+yarn add react-ajax-client
+```
+
 ## Usage
 
 ```tsx
@@ -24,7 +28,7 @@ const client = new Client({
     }
 });
 
-const FetchComponent = () => (
+const ListUsers = () => (
     <Fetch path="/users">
         {({ loading, error, data }) => {
             if (loading) {
@@ -39,7 +43,7 @@ const FetchComponent = () => (
     </Fetch>
 );
 
-const SendComponent = () => (
+const CreateUser = () => (
     <Send
         path="/users"
         onProgress={() => console.log("Processing")}
@@ -62,12 +66,22 @@ const MyApp = () => (
     <Provider client={client}>
         <div>
             <h1>My App</h1>
-            <SendComponent />
-            <FetchComponent />
+            <CreateUser />
+            <ListUsers />
         </div>
     </Provider>
 );
 ```
+
+## Components
+
+### Client
+
+### Provider
+
+### Fetch
+
+### Send
 
 ## License
 
