@@ -43,7 +43,7 @@ class Fetch extends Component<FetchProps, FetchState> {
                 data
             });
         } catch (e) {
-            this.setState({ error: e });
+            this.setState({ loading: false, error: e });
         }
     };
 
