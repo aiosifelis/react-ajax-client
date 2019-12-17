@@ -15,7 +15,7 @@ npm install --save react-ajax-client
 ```tsx
 import React from "react";
 
-import { Provider, Fetch, Send } from "react-ajax-client";
+import { Provider, Fetch, Send, Client } from "react-ajax-client";
 
 const client = new Client({
     baseURL: "http://mywebsite.com/api",
