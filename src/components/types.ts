@@ -12,9 +12,15 @@ export interface RequestHeaders {
     [key: string]: string;
 }
 
+export interface RequestContext {
+    headers: Headers;
+}
+
 export interface ClientOptions {
     baseURL: string;
     headers: RequestHeaders;
+    onBeforeSend?: (context: RequestContext) => void;
+    onAfterSend?: (context: RequestContext) => void;
 }
 
 export interface RequestOptions {
@@ -27,6 +33,12 @@ export interface RequestOptions {
 export interface ProviderProps {
     client: Client;
     children: JSX.Element;
+}
+
+export interface FetchOptions {
+    path: string;
+    variables: { [key: string]: any };
+    headers?: RequestHeaders;
 }
 
 export interface FetchProps {
@@ -42,6 +54,13 @@ export interface FetchState {
     error: Error | null;
     data: any;
     client?: Client | null;
+}
+
+export interface SendOptions {
+    method?: Method;
+    path: string;
+    variables: { [key: string]: any };
+    headers?: RequestHeaders;
 }
 
 export interface SendProps {

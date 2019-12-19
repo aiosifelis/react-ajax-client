@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Context from "./Context";
 import Client from "./Client";
-import { Method, RequestOptions, SendProps } from "./types";
+import { SendProps, SendOptions } from "./types";
 
 class Send extends Component<SendProps> {
     public state: any;
@@ -16,15 +16,15 @@ class Send extends Component<SendProps> {
             onError,
             headers
         } = this.props;
-        const requestOptions: RequestOptions = {
-            method: method || Method.POST,
+        const sendOptions: SendOptions = {
+            method,
             path,
             variables,
             headers
         };
         try {
             onProgress && onProgress();
-            const response = await this.client.request(requestOptions);
+            const response = await this.client.send({ ...sendOptions });
             onComplete && onComplete(response);
         } catch (e) {
             onError && onError(e);
