@@ -175,9 +175,9 @@ const MyApp = () => (
 
 Wrap your root component with this Provider
 
-| Param  | Type               | Default | Description                      |
-| ------ | ------------------ | ------- | -------------------------------- |
-| client | Instance of Client | ""      | The api andpoint of your backend |
+| Param  | Type               | Description                      |
+| ------ | ------------------ | -------------------------------- |
+| client | Instance of Client | The api andpoint of your backend |
 
 ### Fetch
 
