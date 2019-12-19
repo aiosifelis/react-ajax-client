@@ -166,18 +166,18 @@ const MyApp = () => (
 
 ##### Instance Props
 
-| Param   | Type   | Default | Description                 |
-| ------- | ------ | ------- | --------------------------- |
-| baseURL | string | ""      | Theapiandpointofyourbackend |
-| headers | object | {}      | Akeyvaluepairofhttpheaders  |
+| Param   | Type   | Default | Description                      |
+| ------- | ------ | ------- | -------------------------------- |
+| baseURL | string | ""      | The api endpoint of the backend  |
+| headers | object | {}      | A key value pair of http headers |
 
 ### Provider
 
 Wrap your root component with this Provider
 
-| Param  | Type               | Description                      |
-| ------ | ------------------ | -------------------------------- |
-| client | Instance of Client | The api andpoint of your backend |
+| Param  | Type                                                                                           | Description                     |
+| ------ | ---------------------------------------------------------------------------------------------- | ------------------------------- |
+| client | [Client](https://github.com/aiosifelis/react-ajax-client/blob/master/src/components/Client.ts) | An instance of the Client Class |
 
 ### Fetch
 
