@@ -182,17 +182,6 @@ Wrap your root component with this Provider
 
 ### Send
 
-## License
-
-MIT © [aiosifelis](https://github.com/aiosifelis)
-
-##### Instance Props
-
-| Param   | Type   | Default | Description                      |
-| ------- | ------ | ------- | -------------------------------- |
-| baseURL | string | ""      | The api andpoint of your backend |
-| headers | object | {}      | A key value pair of http headers |
-
 ### Provider
 
 ### Fetch
