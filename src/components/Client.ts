@@ -14,7 +14,8 @@ class Client {
 
             const headers: Headers = new Headers({
                 ...this.options.headers,
-                ...fetchOptions.headers
+                ...fetchOptions.headers,
+                "Content-Type": "application/json"
             });
 
             const url = `${baseURL}${path}${
