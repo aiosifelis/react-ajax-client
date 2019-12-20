@@ -1,81 +1,76 @@
-import {
-    ClientOptions,
-    RequestOptions,
-    Method,
-    FetchOptions,
-    SendOptions
-} from "./types";
+import { Method, ClientOptions, FetchOptions, SendOptions } from "./types";
 
 class Client {
-    private options: ClientOptions;
+    public options: ClientOptions;
     constructor(_options: ClientOptions) {
-        this.options = Object.assign(
-            {
-                baseURL: "",
-                headers: {},
-                onBeforeSend: () => {},
-                onAfterSend: () => {}
-            },
-            _options
-        );
+        this.options = _options;
     }
 
-    public fetch = async (options: FetchOptions): Promise<any> => {
-        return await this.request({ method: Method.GET, ...options });
-    };
+    public fetch = async (fetchOptions: FetchOptions): Promise<Response> => {
+        const { baseURL, onRequest, onResponse } = this.options;
 
-    public send = async (options: SendOptions): Promise<any> => {
-        const { method, path, variables, headers } = options;
-        return await this.request({
-            method: method || Method.POST,
-            path,
-            variables,
-            headers
-        });
-    };
-
-    public request = async (requestOptions: RequestOptions): Promise<any> => {
-        const { onBeforeSend, onAfterSend } = this.options;
-        const { method, path, variables } = requestOptions;
         try {
-            let fetchURL = `${this.options.baseURL}${path}`;
+            const { path, query } = fetchOptions;
 
-            const headers = new Headers({
-                ...requestOptions.headers,
-                ...this.options.headers
+            const headers: Headers = new Headers({
+                ...this.options.headers,
+                ...fetchOptions.headers
             });
 
-            const fetchOptions = {
-                method,
+            const url = `${baseURL}${path}${
+                query
+                    ? `?${Object.keys(query)
+                          .map(
+                              key =>
+                                  `${encodeURIComponent(
+                                      key
+                                  )}=${encodeURIComponent(query[key])}`
+                          )
+                          .join("&")}`
+                    : ""
+            }`;
+
+            const request: Request = new Request(url, {
+                method: Method.GET,
                 headers
-            };
+            });
 
-            onBeforeSend && onBeforeSend({ headers });
+            onRequest && onRequest(request);
 
-            if (method === Method.GET && variables) {
-                fetchURL = `${fetchURL}?${Object.keys(variables)
-                    .map(
-                        key =>
-                            `${encodeURIComponent(key)}=${encodeURIComponent(
-                                variables[key]
-                            )}`
-                    )
-                    .join("&")}`;
-            }
+            const response: Response = await fetch(request);
 
-            if (
-                [Method.POST, Method.PUT, Method.DELETE, Method.PATCH].indexOf(
-                    method
-                ) > -1
-            ) {
-                fetchOptions["body"] = JSON.stringify(variables);
-            }
+            onResponse && onResponse(response);
 
-            const result = await fetch(fetchURL, fetchOptions);
+            return await response.json();
+        } catch (e) {
+            throw new Error(e);
+        }
+    };
 
-            onAfterSend && onAfterSend({ headers });
+    public send = async (sendOptions: SendOptions): Promise<Response> => {
+        const { onRequest, onResponse, baseURL } = this.options;
 
-            return await result.json();
+        try {
+            const { path, body, method } = sendOptions;
+
+            const headers: Headers = new Headers({
+                ...this.options.headers,
+                ...sendOptions.headers
+            });
+
+            const request: Request = new Request(`${baseURL}${path}`, {
+                method: method || Method.POST,
+                headers,
+                body: JSON.stringify(body)
+            });
+
+            onRequest && onRequest(request);
+
+            const response: Response = await fetch(request);
+
+            onResponse && onResponse(response);
+
+            return await response.json();
         } catch (e) {
             throw new Error(e);
         }

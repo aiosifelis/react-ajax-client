@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import Context from "./Context";
 import Client from "./Client";
-import {
-    RequestOptions,
-    Method,
-    FetchProps,
-    FetchState,
-    FetchOptions
-} from "./types";
+import { FetchProps, FetchState, FetchOptions } from "./types";
 
 class Fetch extends Component<FetchProps, FetchState> {
     public state: FetchState;
@@ -34,9 +28,9 @@ class Fetch extends Component<FetchProps, FetchState> {
 
     private fetchData = async () => {
         try {
-            const { path, variables } = this.props;
+            const { path, query } = this.props;
             const fetchOptions: FetchOptions = {
-                variables,
+                query,
                 path
             };
             this.setState({ loading: true });

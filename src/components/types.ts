@@ -18,9 +18,11 @@ export interface RequestContext {
 
 export interface ClientOptions {
     baseURL: string;
-    headers: RequestHeaders;
-    onBeforeSend?: (context: RequestContext) => void;
-    onAfterSend?: (context: RequestContext) => void;
+    headers: {
+        [key: string]: string;
+    };
+    onRequest?: (request: Request) => void;
+    onResponse?: (response: Response) => void;
 }
 
 export interface RequestOptions {
@@ -37,14 +39,18 @@ export interface ProviderProps {
 
 export interface FetchOptions {
     path: string;
-    variables: { [key: string]: any };
-    headers?: RequestHeaders;
+    query?: {
+        [key: string]: any;
+    };
+    headers?: {
+        [key: string]: string;
+    };
 }
 
 export interface FetchProps {
     path: string;
-    variables?: any;
-    headers?: RequestHeaders;
+    query?: any;
+    headers?: { [key: string]: string };
     pollInterval?: number;
     children: (state: FetchState) => JSX.Element;
 }
@@ -59,8 +65,12 @@ export interface FetchState {
 export interface SendOptions {
     method?: Method;
     path: string;
-    variables: { [key: string]: any };
-    headers?: RequestHeaders;
+    body: {
+        [key: string]: string;
+    };
+    headers?: {
+        [key: string]: string;
+    };
 }
 
 export interface SendProps {

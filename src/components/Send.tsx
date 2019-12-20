@@ -7,7 +7,7 @@ class Send extends Component<SendProps> {
     public state: any;
     private client: Client;
 
-    private trigger = async (variables: any): Promise<any> => {
+    private trigger = async (body: any): Promise<any> => {
         const {
             method,
             path,
@@ -19,7 +19,7 @@ class Send extends Component<SendProps> {
         const sendOptions: SendOptions = {
             method,
             path,
-            variables,
+            body,
             headers
         };
         try {
